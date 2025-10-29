@@ -2,25 +2,293 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --foreground: #000000;
+  
+  /* Black, Gold, Gray, White color scheme */
+  --crs-black: #000000;
+  --crs-black-90: #1a1a1a;
+  --crs-black-80: #2d2d2d;
+  --crs-black-70: #404040;
+  
+  --crs-gold: #d4af37;
+  --crs-gold-light: #f4d03f;
+  --crs-gold-dark: #b8941f;
+  --crs-gold-darker: #9a7d1a;
+  
+  --crs-gray-10: #f5f5f5;
+  --crs-gray-20: #e5e5e5;
+  --crs-gray-30: #d4d4d4;
+  --crs-gray-40: #a3a3a3;
+  --crs-gray-50: #737373;
+  --crs-gray-60: #525252;
+  --crs-gray-70: #404040;
+  --crs-gray-80: #262626;
+  --crs-gray-90: #171717;
+  
+  --crs-white: #ffffff;
+  --crs-white-90: #fafafa;
+  
+  /* Accent colors for status/alerts */
+  --crs-accent-red: #dc2626;
+  --crs-accent-green: #16a34a;
+  --crs-accent-blue: #2563eb;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #000000;
+    --foreground: #ffffff;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+/* Custom scrollbar - CRS style */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--crs-gray-10);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--crs-gold);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--crs-gold-dark);
+}
+
+/* Focus states */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--crs-gold);
+  outline-offset: 2px;
+}
+
+/* Typography improvements */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--crs-black);
+}
+
+p {
+  color: var(--crs-gray-60);
+}
+
+/* CRS button styles */
+.crs-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.125rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.crs-button--primary {
+  background: linear-gradient(135deg, var(--crs-gold) 0%, var(--crs-gold-dark) 100%);
+  color: var(--crs-black);
+  box-shadow: 0 4px 6px rgba(212, 175, 55, 0.3);
+}
+
+.crs-button--primary:hover {
+  background: linear-gradient(135deg, var(--crs-gold-light) 0%, var(--crs-gold) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(212, 175, 55, 0.4);
+}
+
+.crs-button--secondary {
+  background-color: var(--crs-black);
+  color: var(--crs-gold);
+  border: 2px solid var(--crs-gold);
+}
+
+.crs-button--secondary:hover {
+  background-color: var(--crs-gold);
+  color: var(--crs-black);
+}
+
+/* CRS card styles */
+.crs-tile {
+  background: var(--crs-white);
+  padding: 1.5rem;
+  border: 1px solid var(--crs-gray-20);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.crs-tile::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--crs-gold) 0%, var(--crs-gold-light) 100%);
+  transform: scaleX(0);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.crs-tile:hover::before {
+  transform: scaleX(1);
+}
+
+.crs-tile:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px);
+  border-color: var(--crs-gold);
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .crs-tile {
+    border: 2px solid var(--crs-black);
+  }
+  
+  .crs-button--primary {
+    border: 2px solid var(--crs-gold-darker);
+  }
+}
+
+/* GSAP Animations - Smooth keyframes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes goldShimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.gold-shimmer {
+  background: linear-gradient(90deg, 
+    var(--crs-gold-dark) 0%, 
+    var(--crs-gold-light) 50%, 
+    var(--crs-gold-dark) 100%);
+  background-size: 1000px 100%;
+  animation: goldShimmer 3s linear infinite;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s cubic-bezier(0.2, 0, 0.38, 0.9);
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.2, 0, 0.38, 0.9);
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.8s cubic-bezier(0.2, 0, 0.38, 0.9);
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.8s cubic-bezier(0.2, 0, 0.38, 0.9);
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.6s cubic-bezier(0.2, 0, 0.38, 0.9);
+}
+
+/* Animation-ready cards - ensure proper visibility */
+.solution-card,
+.training-card,
+.testimonial-card {
+  will-change: opacity, transform;
+}
+
+/* Ensure text is always visible with proper contrast */
+.bg-black .text-gray-900,
+.bg-gray-900 .text-gray-900 {
+  color: var(--crs-white) !important;
+}
+
+.bg-black .text-black,
+.bg-gray-900 .text-black {
+  color: var(--crs-white) !important;
+}
+
