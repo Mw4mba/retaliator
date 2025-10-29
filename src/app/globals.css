@@ -83,11 +83,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   line-height: 1.25;
   letter-spacing: -0.01em;
-  color: var(--crs-black);
-}
-
-p {
-  color: var(--crs-gray-60);
+  /* Removed fixed color - let utility classes control text color */
 }
 
 /* CRS button styles */
@@ -279,6 +275,8 @@ p {
 .training-card,
 .testimonial-card {
   will-change: opacity, transform;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 /* Ensure text is always visible with proper contrast */

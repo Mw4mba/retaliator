@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { NavigationButton } from '@/components/NavigationButton';
 import { 
   Shield, 
   Users, 
@@ -104,45 +105,57 @@ export default function Home() {
     });
 
     // Solutions cards animation
-    gsap.from('.solution-card', {
-      scrollTrigger: {
-        trigger: solutionsRef.current,
-        start: 'top 80%',
-        toggleActions: 'play none none reverse',
-      },
-      opacity: 0,
-      y: 40,
-      stagger: 0.15,
-      duration: 0.8,
-      ease: 'power3.out'
-    });
+    const solutionCards = document.querySelectorAll('.solution-card');
+    if (solutionCards.length > 0) {
+      gsap.set('.solution-card', { opacity: 1 }); // Ensure visible by default
+      gsap.from('.solution-card', {
+        scrollTrigger: {
+          trigger: solutionsRef.current,
+          start: 'top 80%',
+          toggleActions: 'play none none reverse',
+        },
+        opacity: 0,
+        y: 40,
+        stagger: 0.15,
+        duration: 0.8,
+        ease: 'power3.out'
+      });
+    }
 
     // Training cards animation
-    gsap.from('.training-card', {
-      scrollTrigger: {
-        trigger: trainingRef.current,
-        start: 'top 80%',
-        toggleActions: 'play none none reverse',
-      },
-      opacity: 0,
-      scale: 0.9,
-      stagger: 0.1,
-      duration: 0.7,
-      ease: 'back.out(1.7)'
-    });
+    const trainingCards = document.querySelectorAll('.training-card');
+    if (trainingCards.length > 0) {
+      gsap.set('.training-card', { opacity: 1 }); // Ensure visible by default
+      gsap.from('.training-card', {
+        scrollTrigger: {
+          trigger: trainingRef.current,
+          start: 'top 80%',
+          toggleActions: 'play none none reverse',
+        },
+        opacity: 0,
+        scale: 0.9,
+        stagger: 0.1,
+        duration: 0.7,
+        ease: 'back.out(1.7)'
+      });
+    }
 
     // Testimonials animation
-    gsap.from('.testimonial-card', {
-      scrollTrigger: {
-        trigger: testimonialsRef.current,
-        start: 'top 70%',
-      },
-      opacity: 0,
-      y: 30,
-      stagger: 0.2,
-      duration: 0.8,
-      ease: 'power3.out'
-    });
+    const testimonialCards = document.querySelectorAll('.testimonial-card');
+    if (testimonialCards.length > 0) {
+      gsap.set('.testimonial-card', { opacity: 1 }); // Ensure visible by default
+      gsap.from('.testimonial-card', {
+        scrollTrigger: {
+          trigger: testimonialsRef.current,
+          start: 'top 70%',
+        },
+        opacity: 0,
+        y: 30,
+        stagger: 0.2,
+        duration: 0.8,
+        ease: 'power3.out'
+      });
+    }
 
     // Gold accent animations
     gsap.to('.gold-accent', {
@@ -172,7 +185,7 @@ export default function Home() {
             <div className="space-y-8">
               <div className="space-y-6">
                 <div className="w-20 h-1 bg-linear-to-r from-yellow-400 to-yellow-600 gold-accent"></div>
-                <h1 className="hero-title text-5xl lg:text-7xl font-bold leading-tight">
+                <h1 className="hero-title text-5xl lg:text-7xl font-bold leading-tight text-white">
                   We Win Together.
                   <br />
                   <span className="bg-linear-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">We Lose Together!</span>
@@ -186,13 +199,22 @@ export default function Home() {
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
-                <button className="hero-cta bg-linear-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black px-8 py-4 rounded-lg font-bold transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-yellow-600/50 hover:shadow-xl hover:shadow-yellow-600/60 hover:scale-105">
+                <NavigationButton 
+                  variant="primary" 
+                  size="lg" 
+                  rightIcon={ChevronRight}
+                  href="#solutions"
+                  className="shadow-lg shadow-yellow-600/50 hover:shadow-xl hover:shadow-yellow-600/60"
+                >
                   Get Started
-                  <ChevronRight size={20} />
-                </button>
-                <button className="hero-cta border-2 border-yellow-400 hover:bg-yellow-400 hover:text-black text-yellow-400 px-8 py-4 rounded-lg font-bold transition-all duration-300 hover:scale-105">
+                </NavigationButton>
+                <NavigationButton 
+                  variant="outline" 
+                  size="lg"
+                  href="#contact"
+                >
                   Request Demo
-                </button>
+                </NavigationButton>
               </div>
             </div>
             <div className="relative hero-image">
@@ -472,13 +494,13 @@ export default function Home() {
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="training-card bg-gray-900 p-6 rounded-xl shadow-lg border-2 border-gray-800 hover:border-yellow-400 hover:shadow-2xl transition-all duration-300 group">
+            <div className="training-card bg-gray-800 p-6 rounded-xl shadow-lg border-2 border-gray-700 hover:border-yellow-400 hover:shadow-2xl transition-all duration-300 group">
               <div className="space-y-4">
                 <div className="h-16 bg-linear-to-r from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center group-hover:shadow-lg transition-shadow">
                   <span className="text-black font-bold text-lg">IBM</span>
                 </div>
                 <h3 className="font-bold text-white">IBM Technical Training</h3>
-                <p className="text-sm text-gray-300">World-class IBM technical training delivered globally with certified instructors.</p>
+                <p className="text-sm text-gray-200">World-class IBM technical training delivered globally with certified instructors.</p>
                 <div className="space-y-2">
                   <a href="https://retaliator.co.za/authorized-ibm-technical-training/" className="block text-yellow-400 hover:text-yellow-300 text-sm transition-colors">View Courses</a>
                   <a href="https://retaliator.co.za/wp-content/uploads/2025/07/CRS-Training-2025-V8.2.pdf" className="inline-flex items-center gap-1 text-yellow-400 hover:text-yellow-300 text-sm transition-colors">
@@ -489,15 +511,15 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="training-card bg-gray-900 p-6 rounded-xl shadow-lg border-2 border-gray-800 hover:border-yellow-400 hover:shadow-2xl transition-all duration-300 group">
+            <div className="training-card bg-gray-800 p-6 rounded-xl shadow-lg border-2 border-gray-700 hover:border-yellow-400 hover:shadow-2xl transition-all duration-300 group">
               <div className="space-y-4">
                 <div className="h-16 bg-linear-to-r from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center group-hover:shadow-lg transition-shadow">
                   <span className="text-black font-bold text-lg">RedHat</span>
                 </div>
                 <h3 className="font-bold text-white">RedHat Training</h3>
-                <p className="text-sm text-gray-300">Hands-on training to stay abreast of technology trends and achieve certification.</p>
+                <p className="text-sm text-gray-200">Hands-on training to stay abreast of technology trends and achieve certification.</p>
                 <div className="space-y-2">
-                  <span className="block text-gray-400 text-sm">Linux & Cloud Technologies</span>
+                  <span className="block text-gray-300 text-sm">Linux & Cloud Technologies</span>
                   <a href="https://retaliator.co.za/wp-content/uploads/2025/07/CRS-Training-2025-V8.2.pdf" className="inline-flex items-center gap-1 text-yellow-400 hover:text-yellow-300 text-sm transition-colors">
                     <Download size={14} />
                     Download Brochure
@@ -506,15 +528,15 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="training-card bg-gray-900 p-6 rounded-xl shadow-lg border-2 border-gray-800 hover:border-yellow-400 hover:shadow-2xl transition-all duration-300 group">
+            <div className="training-card bg-gray-800 p-6 rounded-xl shadow-lg border-2 border-gray-700 hover:border-yellow-400 hover:shadow-2xl transition-all duration-300 group">
               <div className="space-y-4">
                 <div className="h-16 bg-linear-to-r from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center group-hover:shadow-lg transition-shadow">
                   <span className="text-black font-bold text-lg">SUSE</span>
                 </div>
                 <h3 className="font-bold text-white">SUSE Training</h3>
-                <p className="text-sm text-gray-300">SUSE Linux, Manager, Rancher, Harvester, NeuVector and SUSE Edge training.</p>
+                <p className="text-sm text-gray-200">SUSE Linux, Manager, Rancher, Harvester, NeuVector and SUSE Edge training.</p>
                 <div className="space-y-2">
-                  <span className="block text-gray-400 text-sm">Enterprise Linux Solutions</span>
+                  <span className="block text-gray-300 text-sm">Enterprise Linux Solutions</span>
                   <a href="https://retaliator.co.za/wp-content/uploads/2025/07/CRS-Training-2025-V8.2.pdf" className="inline-flex items-center gap-1 text-yellow-400 hover:text-yellow-300 text-sm transition-colors">
                     <Download size={14} />
                     Download Brochure
@@ -523,15 +545,15 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="training-card bg-gray-900 p-6 rounded-xl shadow-lg border-2 border-gray-800 hover:border-yellow-400 hover:shadow-2xl transition-all duration-300 group">
+            <div className="training-card bg-gray-800 p-6 rounded-xl shadow-lg border-2 border-gray-700 hover:border-yellow-400 hover:shadow-2xl transition-all duration-300 group">
               <div className="space-y-4">
                 <div className="h-16 bg-linear-to-r from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center group-hover:shadow-lg transition-shadow">
                   <span className="text-black font-bold text-lg">CompTIA</span>
                 </div>
                 <h3 className="font-bold text-white">CompTIA Training</h3>
-                <p className="text-sm text-gray-300">Advancing people & organizations by delivering tech talent to the global workforce.</p>
+                <p className="text-sm text-gray-200">Advancing people & organizations by delivering tech talent to the global workforce.</p>
                 <div className="space-y-2">
-                  <span className="block text-gray-400 text-sm">IT Fundamentals & Security</span>
+                  <span className="block text-gray-300 text-sm">IT Fundamentals & Security</span>
                   <a href="https://retaliator.co.za/wp-content/uploads/2025/07/CRS-Training-2025-V8.2.pdf" className="inline-flex items-center gap-1 text-yellow-400 hover:text-yellow-300 text-sm transition-colors">
                     <Download size={14} />
                     Download Brochure
