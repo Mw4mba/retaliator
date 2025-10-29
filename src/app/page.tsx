@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { NavigationButton } from '@/components/NavigationButton';
+import { MobileMenu } from '@/components/MobileMenu';
 import { 
   Shield, 
   Users, 
@@ -173,6 +174,9 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Mobile Menu */}
+      <MobileMenu />
+      
       {/* Hero Section */}
       <section ref={heroRef} className="relative bg-black text-white overflow-hidden">
         <div className="absolute inset-0 bg-linear-to-br from-black via-gray-900 to-black"></div>
